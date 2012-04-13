@@ -18,7 +18,7 @@ namespace UltimaXNA.Data
 {
     public class Skills
     {
-        public static int DefaultLength = 55;
+        public static int DefaultLength = 58;
 
         private static FileIndex m_FileIndex = new FileIndex("Skills.idx", "Skills.mul", DefaultLength, -1);
         public static FileIndex FileIndex { get { return m_FileIndex; } }

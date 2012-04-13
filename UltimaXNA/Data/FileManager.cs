@@ -26,61 +26,21 @@ namespace UltimaXNA.Data
             get { return _isDataPresent; }
         }
 
-        static readonly string[] _knownRegkeys = new string[] { 
-                @"Origin Worlds Online\Ultima Online\KR Legacy Beta", 
-                @"EA Games\Ultima Online: Mondain's Legacy\1.00.0000", 
-                @"Origin Worlds Online\Ultima Online\1.0", 
-                @"Origin Worlds Online\Ultima Online Third Dawn\1.0",
-                @"EA GAMES\Ultima Online Samurai Empire", 
-                @"EA Games\Ultima Online: Mondain's Legacy", 
-                @"EA GAMES\Ultima Online Samurai Empire\1.0", 
-                @"EA GAMES\Ultima Online Samurai Empire\1.00.0000", 
-                @"EA GAMES\Ultima Online: Samurai Empire\1.0", 
-                @"EA GAMES\Ultima Online: Samurai Empire\1.00.0000", 
-                @"EA Games\Ultima Online: Mondain's Legacy\1.0", 
-                @"EA Games\Ultima Online: Mondain's Legacy\1.00.0000", 
-                @"Origin Worlds Online\Ultima Online Samurai Empire BETA\2d\1.0", 
-                @"Origin Worlds Online\Ultima Online Samurai Empire BETA\3d\1.0", 
-                @"Origin Worlds Online\Ultima Online Samurai Empire\2d\1.0", 
-                @"Origin Worlds Online\Ultima Online Samurai Empire\3d\1.0",
-                @"Electronic Arts\EA Games\Ultima Online Stygian Abyss Classic",
-                @"Electronic Arts\EA Games\"
-            };
-
         private static string m_FileDirectory;
-
-        public static bool Is64Bit
-        {
-            get { return IntPtr.Size == 8; } 
-        }
 
         static FileManager()
         {
-            Logger.Debug("Looking for UO Installation. Is64Bit = {0}", Is64Bit);
-
-            for (int i = 0; i < _knownRegkeys.Length; i++)
+            Logger.Debug("Checking UO path");
+            string exePath = @"c:\UltimaOnline\";
+                
+            if (exePath != null && Directory.Exists(exePath))
             {
-                string exePath;
+                Logger.Debug("UO path seems legit", exePath);
 
-                Logger.Debug("Looking for registry key [{0}].", _knownRegkeys[i]);
-
-                if (Is64Bit)
-                {
-                    exePath = GetExePath(@"Wow6432Node\" + _knownRegkeys[i]);
-                }
-                else
-                {
-                    exePath = GetExePath(_knownRegkeys[i]);
-                }
-
-                if (exePath != null && Directory.Exists(exePath))
-                {
-                    Logger.Debug("Found UO Installation at [{0}].", exePath);
-
-                    m_FileDirectory = exePath;
-                    _isDataPresent = true;
-                }
+                m_FileDirectory = exePath;
+                _isDataPresent = true;
             }
+            
             if (m_FileDirectory == null)
             {
                 Logger.Fatal("Did not find UO Installation.");

@@ -52,7 +52,7 @@ namespace UltimaXNA.UILegacy.ClientsideGumps
             AddControl(new ResizePic(this, g1));
             AddControl(g1);
             // password field
-            TextEntry g2 = new TextEntry(this, 0, 332, 386, 200, 20, 0, (int)LoginGumpTextFields.Password, 32, "Admin");
+            TextEntry g2 = new TextEntry(this, 0, 332, 386, 200, 20, 0, (int)LoginGumpTextFields.Password, 32, "123");
             g2.IsPasswordField = true;
             g2.HtmlTag = "<basefont color=#000000><big>";
             AddControl(new ResizePic(this, g2));
